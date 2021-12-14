@@ -4,3 +4,8 @@ kubernetesVersion: 1.21.1 #<-- Use the word stable for newest version
 controlPlaneEndpoint: "kube-primary:6443"  #<-- Use the node alias not the IP
 networking:
   podSubnet: 192.168.0.0/16 #<-- Match the IP range from the Calico config file
+apiServer:
+  certSANs:
+    - "192.168.50.2"
+  extraArgs:
+    advertise-address: "191.168.50.2"
