@@ -17,8 +17,8 @@ Vagrant.configure("2") do |config|
     wget https://docs.projectcalico.org/manifests/calico.yaml
   SHELL
   config.vm.provision "hosts", type: "shell", inline: <<-SHELL
-      sudo bash -c 'echo "192.168.60.2 kube-primary.local kube-primary" >> /etc/hosts'
-      sudo bash -c 'echo "192.168.60.3 kube-worker.local kube-worker" >> /etc/hosts'
+      sudo bash -c 'echo "192.168.50.2 kube-primary.local kube-primary" >> /etc/hosts'
+      sudo bash -c 'echo "192.168.50.3 kube-worker.local kube-worker" >> /etc/hosts'
   SHELL
   config.vm.define "kube_primary" do |kp|
     kp.vm.hostname = "kube-primary"
