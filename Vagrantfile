@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
     sudo apt update
-    sudo apt -y install kubelet kubeadm kubectl docker.io
+    sudo apt -y install kubeadm=1.21.1-00 kubelet=1.21.1-00 kubectl=1.21.1-00 docker.io
     wget https://docs.projectcalico.org/manifests/calico.yaml
   SHELL
   config.vm.provision "hosts", type: "shell", inline: <<-SHELL
