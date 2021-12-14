@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
-        "kubeadm"
+        "cgroupdriver",
+        "kube",
+        "kubeadm",
+        "kubectl",
+        "kubelet",
+        "swapoff"
     ]
 }
