@@ -13,7 +13,8 @@ sudo apt-get install -y \
     ca-certificates \
     curl \
     gnupg \
-    lsb-release
+    lsb-release \
+    bash-completion
 
 sudo apt-get update -y
 sudo apt-get install docker.io -y
