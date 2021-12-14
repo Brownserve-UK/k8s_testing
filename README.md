@@ -14,7 +14,7 @@ To join the worker
 ```sh
 sudo kubeadm join \
     --token <token> \
-    kube-primary:6443 \
+    kube-control:6443 \
     --discovery-token-ca-cert-hash \
     sha256:<openssl_sha>
 ```

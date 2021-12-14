@@ -9,11 +9,11 @@ Vagrant.configure("2") do |config|
   # IMPORTANT: we must update and install ca-certifcates due to the letsencrypt SSL certificate expiring.
   config.vm.provision "install", type: "shell", path: "vagrant/common.sh"
   config.vm.provision "hosts", type: "shell", inline: <<-SHELL
-      sudo bash -c 'echo "191.168.50.2 kube-primary.local kube-primary" >> /etc/hosts'
+      sudo bash -c 'echo "191.168.50.2 kube-control.local kube-control" >> /etc/hosts'
       sudo bash -c 'echo "191.168.50.3 kube-worker.local kube-worker" >> /etc/hosts'
   SHELL
-  config.vm.define "kube-primary" do |kp|
-    kp.vm.hostname = "kube-primary"
+  config.vm.define "kube-control" do |kp|
+    kp.vm.hostname = "kube-control"
     kp.vm.network "private_network", ip: "191.168.50.2"
     kp.vm.provision "configure", type: "shell", path: "vagrant/control.sh"
   end
