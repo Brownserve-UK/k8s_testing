@@ -18,19 +18,17 @@ Vagrant.configure("2") do |config|
     # Install k8s et al
     sudo apt update
     sudo apt -y install kubeadm=1.21.1-00 kubelet=1.21.1-00 kubectl=1.21.1-00 docker.io bash-completion
-    # Copy the network plugin config
-    wget https://docs.projectcalico.org/manifests/calico.yaml
     # Enable tab completion for kubectl
     source <(kubectl completion bash)
     echo "source <(kubectl completion bash)" >> /home/vagrant/.bashrc
   SHELL
   config.vm.provision "hosts", type: "shell", inline: <<-SHELL
-      sudo bash -c 'echo "192.168.50.2 kube-primary.local kube-primary" >> /etc/hosts'
-      sudo bash -c 'echo "192.168.50.3 kube-worker.local kube-worker" >> /etc/hosts'
+      sudo bash -c 'echo "191.168.50.2 kube-primary.local kube-primary" >> /etc/hosts'
+      sudo bash -c 'echo "191.168.50.3 kube-worker.local kube-worker" >> /etc/hosts'
   SHELL
   config.vm.define "kube-primary" do |kp|
     kp.vm.hostname = "kube-primary"
-    kp.vm.network "private_network", ip: "192.168.50.2"
+    kp.vm.network "private_network", ip: "191.168.50.2"
     kp.vm.provision "configure", type: "shell", inline: <<-SHELL
       # Initialize the cluster
       sudo kubeadm init --config=/vagrant/kubeadm-config.yaml --upload-certs | tee kubeadm-init.out
@@ -43,11 +41,11 @@ Vagrant.configure("2") do |config|
       sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
       sudo chown vagrant:vagrant /home/vagrant/.kube/config
       # Apply networking config
-      kubectl apply -f calico.yaml
+      kubectl apply -f /vagrant/calico.yaml
     SHELL
   end
   config.vm.define "kube-worker" do |kw|
     kw.vm.hostname = "kube-worker"
-    kw.vm.network "private_network", ip: "192.168.50.3"
+    kw.vm.network "private_network", ip: "191.168.50.3"
   end
 end
